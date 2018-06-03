@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+		
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
+<h:outputStylesheet library="css" name="bootstrap.css"/>
+<h:outputStylesheet library="css" name="bootstrap.min.css"/>
+<h:outputScript library="js" name="jquery-3.2.1.js"/>
+<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+		
+	
+	
+</h:head> 
+<body> 
+		
+			<ui:composition>
+			 
+			
+				
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+    	
+    
+    <ul class="nav navbar-nav">
+      		<li><a href="index.xhtml">Ana Sayfa</a></li>
+      		<li class="dropdown">
+        		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Üye İşlemleri
+        		<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        	<li><a href="uyeKayit.xhtml">Üye Kayıt</a></li>
+          	<li><a href="uyeDuzenle.xhtml">Üye Bilgileri Düzenle</a></li>
+        </ul>
+      		</li>	
+      	<li class="dropdown">
+        	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Kitap İşlemleri
+        	<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        	<li><a href="kitapKayit.xhtml">Kitap Kayıt</a></li>
+          	<li><a href="tumKitaplar.xhtml">Tüm Kitaplar</a></li>
+          	<li><a href="kitaplariListele.xhtml">Genel Kitap Listesi</a></li>
+        </ul>
+      	</li>
+      
+      <li class="dropdown">
+      	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ödünç İşlemleri
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+       		<li><a href="oduncVerme.xhtml">Ödünç Verme</a></li>
+          	<li><a href="oduncTeslim.xhtml">Ödünç Teslim</a></li>
+        </ul>
+      </li>
+      
+     
+      
+      
+      <li><a style="color:white;" href="yoneticiGiris.xhtml">ÇIKIŞ</a></li>
+    </ul>
+  </div>
+</nav>
+			</ui:composition>
+		
+	
+</body> 
+</html>

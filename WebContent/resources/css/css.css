@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900'); 
+html,body{
+	margin: 0;
+	padding: 0; 
+	font-family: 'Raleway', sans-serif;
+} 
+.p0{ padding: 0;} 
+a,a:hover,a:visited,a:active,a:focus{text-decoration: none;} 
+
+
+
+.panelContent {
+	position: relative;
+    display: block;
+    float: none;
+    right: 0;
+    left: 0;
+    margin: 200px auto;
+    background: transparent;
+    padding: 30px;  
+	border-radius: 55%;
+	overflow: hidden;
+    transform: scale(0);
+	transition: all .6s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+.panelContent.on{
+	border-radius: 0;
+    background: #fff;
+    transform: scale(1);
+}
+.panelContent .loadingWrap {
+	position: absolute;
+    background: #fff;
+    z-index: 2;
+    height: 65%;
+    left: 0;
+    right: 0;
+	padding: 25px 0;
+	display: none;
+} 
+.panelContent .loadingWrap p{
+	font-size: 16px;
+}
+.panelContent h2 {
+	margin: 0;
+}
+.panelContent .formGr{
+	position: relative;
+    margin: 18px 0px;
+}
+.panelContent .formGr label{
+	display: block;
+}
+.panelContent .formGr input.textCt{
+	width: 100%;
+    background: transparent;
+	padding: 5px;
+    border: none;
+    border-bottom: 2px solid #d2d2d2; 
+	color: #555;
+    font-size: 14px;
+    outline: 0;
+}
+.panelContent .formGr input.textCt:focus{ 
+    border-bottom: 2px solid #b76a21;
+}
+.panelContent .formGr.btnX{
+	text-align: center;
+	display: block;
+	width: 100%;
+}
+.panelContent .formGr button{
+	width: 200px;
+    height: 35px;
+	display: inline-block;
+    background: #fff;
+    border:none;
+    outline: 0;
+	margin: 5px 0 0 0;
+	color: #fff;
+    font-size: 15px;
+    border-radius: 4px;
+}
+.panelContent .formGr button.login{
+    background: #0d5d98;
+}
+.panelContent .formGr button.login:hover{
+    background: #084e82;
+}
+.panelContent .formGr button.remb{
+    background: #b76a21;
+}
+.panelContent .formGr button.remb:hover{
+    background: #a75d17;
+}
+.panelContent .copyright{
+	font-size: 11px;
+    text-align: center;
+    color: #a0a0a0;
+}

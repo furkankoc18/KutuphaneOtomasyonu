@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+		<title>Kitap Listele</title>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
+		<h:outputStylesheet library="css" name="bootstrap.css"/>
+		<h:outputStylesheet library="css" name="bootstrap.min.css"/>
+		<h:outputScript library="js" name="jquery-3.2.1.js"/>
+		<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+	<h:outputStylesheet library="css" name="themeP.css"/>
+		<h:outputScript>
+  			$(document).ready(function()
+  			{
+  			$('.data-place-add').attr('placeholder','Kitap Ara')
+  			});
+		</h:outputScript>
+		
+ <style>
+ 
+  body
+{
+	background-image: url("/Kutuphane-Otomasyonu/faces/javax.faces.resource/img/listeBack.jpg");
+	background-repeat:no-repeat;
+	background-size: cover;
+	
+}
+
+.output
+{
+font-weight: bold;
+}
+ 
+.ui-growl 
+{
+    position: absolute;
+    top: 38%;
+    left: 40%;
+    width: 301px;
+}
+</style>
+
+<script>
+
+</script>
+
+</h:head> 
+	
+
+
+<body> 
+																<!-- MENU BASLANGİCİ -->
+		
+	<h:form>
+															<!-- Kullanıcı Menüsü -->
+		
+		<h:panelGroup layout="block"  rendered="#{!gorevlislemleri.sayfaGorunurluk}">
+			<ui:include src="kullaniciMenu.xhtml"></ui:include>
+		</h:panelGroup>
+														<!-- Admin Menüsü -->
+		
+		<h:panelGroup layout="block" rendered="#{gorevlislemleri.sayfaGorunurluk}">
+			<ui:include  src="/adminMenu.xhtml"></ui:include>
+		</h:panelGroup>
+
+	</h:form>
+	
+															<!-- MENU BİTİS  -->
+	
+	<h1 style="text-align:center;">Tüm Kitaplar</h1>
+	<br></br>
+	
+	<div class="list-group">
+		<h:form>
+			<div class="input-group">
+				<h:panelGrid columns="2">
+					
+					<h:graphicImage library="img" name="searchBook.jpg" width="100"/>
+					<h:inputText value="#{kitapislemleri.aramaYazisi}"   class="form-control data-place-add" style="width:700px;" >
+						<f:ajax listener="#{kitapislemleri.kitapAraKitapListele}" event="keyup" render="liste" execute="@this"></f:ajax>
+					</h:inputText>
+				
+				</h:panelGrid>
+      		</div>
+			
+			<h:dataTable value="#{kitapislemleri.kitaplarList}" var="kitaplar" class="table" frame="lhs" id="liste">
+							
+				<h:column>
+					<h:outputLabel value="#{kitapislemleri.kitaplarList.indexOf(kitaplar)+1}" style="font-weight:bold;" />
+				</h:column>
+		
+				<h:column>
+				
+					<f:facet name="header">
+						<h:outputText value="Kitap İD" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.kitapId}" styleClass="output" />
+				
+				</h:column>
+		
+				<h:column>
+				
+					<f:facet name="header">
+						<h:outputText value="Barkod No" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.barkodNo}" styleClass="output"/>
+					
+				</h:column>
+		
+				<h:column>
+				
+					<f:facet name="header">
+						<h:outputText value="Temin Tarihi" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.teminTarihi}" styleClass="output" />
+					
+				</h:column>
+		
+				<h:column>
+					
+					<f:facet name="header">							
+						<h:outputText value="Kitap Adı" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.kitapAdi}" styleClass="output"/>
+				
+				</h:column>
+		
+				<h:column>
+				
+					<f:facet name="header">
+						<h:outputText value="Yazar Adı" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.yazarAdi.toUpperCase()}" styleClass="output"/>
+				
+				</h:column>
+		
+				<h:column>
+				
+					<f:facet name="header">						
+						<h:outputText value="Yayın Evi" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.yayinEvi.toUpperCase()}" styleClass="output" />
+					
+				</h:column>
+					
+				<h:column>
+				
+					<f:facet name="header">	
+						<h:outputText value="Adeti" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.stokSayisi}" styleClass="output" />
+				
+				</h:column>
+			
+				<h:column>
+				
+					<f:facet name="header">	
+						<h:outputText value="Kitap Türü" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{kitaplar.kitapTuru}" styleClass="output" />
+				
+				</h:column>
+			
+			</h:dataTable>
+			
+			<div>
+				<h2 style="text-align:center; font-weight:bold;">#{kitapislemleri.kitapVarMi()}</h2>
+			</div>
+		</h:form>
+	</div>
+</body> 
+</html>

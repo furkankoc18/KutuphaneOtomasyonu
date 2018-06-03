@@ -1,0 +1,9 @@
+tumkitaplar => 	<h:panelGrid columns="2">
+				<h:graphicImage library="img" name="searchBook.jpg" width="100" />
+
+				<h:inputText value="#{kitapislemleri.aramaYazisi}"
+					class="form-control data-place-add" style="width:700px;">
+					<f:ajax listener="#{kitapislemleri.kitapAraTumKitaplar}"
+						event="keyup" execute="@this" render="liste"></f:ajax>
+				</h:inputText>
+			</h:panelGrid>

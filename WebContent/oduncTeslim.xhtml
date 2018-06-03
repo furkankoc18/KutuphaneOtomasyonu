@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	
+	<title>Ödünç Teslim</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
+	<h:outputStylesheet library="css" name="bootstrap.css"/>
+	<h:outputStylesheet library="css" name="bootstrap.min.css"/>
+	<h:outputScript library="js" name="jquery-3.2.1.js"/>
+	<h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+		<h:outputStylesheet library="css" name="themeP.css"/>
+
+	<style>
+
+body
+{
+	background-image: url("/Kutuphane-Otomasyonu/faces/javax.faces.resource/img/listeBack.jpg");
+	background-repeat:no-repeat;
+	background-size: cover;
+	
+}
+
+.output
+{
+font-weight: bold;
+}
+
+.ui-growl {
+    position: absolute;
+    top: 38%;
+    left: 40%;
+    width: 301px;
+}
+ .ui-growl-icon-close{
+    background-color:yellow;
+    
+}
+
+</style>
+
+<h:outputScript>
+  			$(document).ready(function()
+  			{
+  			$('.data-place-add').attr('placeholder','Kullanıcı Ara(T.C.)')
+  			});
+  			function tikla() {
+	    $('#mymodal').modal('show');
+		
+	}
+		</h:outputScript>
+
+</h:head> 
+
+<body> 
+																<!-- MENU BASLANGİCİ -->
+		
+	<h:form>
+															<!-- Kullanıcı Menüsü -->
+		
+		<h:panelGroup layout="block"  rendered="#{!gorevlislemleri.sayfaGorunurluk}">
+			<ui:include src="kullaniciMenu.xhtml"></ui:include>
+		</h:panelGroup>
+														<!-- Admin Menüsü -->
+		
+		<h:panelGroup layout="block" rendered="#{gorevlislemleri.sayfaGorunurluk}">
+			<ui:include  src="/adminMenu.xhtml"></ui:include>
+		</h:panelGroup>
+
+	</h:form>
+	
+															<!-- MENU BİTİS  -->
+		<h1 style="text-align:center;">Ödünç Teslim</h1>
+		<br></br>
+		
+		<h:form>	
+			<h:dataTable value="#{oduncislemler.oduncVerilenlerTcList}" var="tc" class="table" id="liste">
+			
+				<h:column>
+				
+					<f:facet name="header">
+						<h:outputText value="İsim" style="color:red;" />
+					</f:facet>
+					<h:outputText id="isim" value="#{oduncislemler.isim(tc).toUpperCase()}" styleClass="output" />
+				
+				</h:column>
+						
+				<h:column>
+				
+					<f:facet name="header">
+						<h:outputText value="Soyisim" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{oduncislemler.soyisim(tc).toUpperCase()}" styleClass="output"/>
+					
+				</h:column>
+						
+				<h:column>
+				
+					<f:facet name="header">	
+						<h:outputText value="T.C." style="color:red;" />
+					</f:facet>
+					<h:commandLink actionListener="#{oduncislemler.deneme(tc)}" type="button" onclick="$('#myModal').modal('show');" ><h:outputText value="#{tc}" styleClass="output" />
+						<f:ajax	  execute="@this" render=":modalBaslik :kitapListe "></f:ajax>		
+					</h:commandLink>
+				
+				</h:column>
+						
+				<h:column>
+				
+					<f:facet name="header">
+						<h:outputText value="Ödünç Verilen Adet" style="color:red;" />
+					</f:facet>
+					<h:outputText value="#{oduncislemler.oducVerilenAdet(tc)}" styleClass="output"/>
+				
+				</h:column>
+						
+			</h:dataTable>
+		</h:form>	
+					
+		<div class="container">
+  
+ 	 <!-- Modal -->
+  	<div class="modal fade" id="myModal" role="dialog">
+
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      	<div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+          	
+          	<h4 class="modal-title">
+          	
+          		<h:form id="modalBaslik">
+          			<h:outputText value="#{oduncislemler.kullanicibean2.isim.toUpperCase()}  #{oduncislemler.kullanicibean2.soyisim.toUpperCase()}" style="color:red;font-weight:bold;"/>
+				</h:form>
+          	
+          	</h4>
+        </div>
+        
+        <div class="modal-body">
+		
+			<h:form id="kitapListe">
+				
+				<h:dataTable class="table" value="#{oduncislemler.oduncAlinanlarBarkodNo}" var="barkod" id="as">
+					<f:facet name="header"><h3 style="text-align:center;">Alınan Kitaplar</h3></f:facet>
+					
+					<h:column>
+						<h:outputText value="#{oduncislemler.oduncAlinanlarBarkodNo.indexOf(barkod)+1}" style="font-weight:bold;"/>
+					</h:column>
+				
+					<h:column>
+						<f:facet name="header">Alınan Tarih</f:facet>
+						<h:outputText value="#{oduncislemler.oduncAlinanlarTarih.get(oduncislemler.oduncAlinanlarBarkodNo.indexOf(barkod))}" />
+					</h:column>
+				
+					<h:column>
+						<f:facet name="header">Kitap İsmi</f:facet>
+						<h:outputText value="#{oduncislemler.oduncAlinanlarisim.get(oduncislemler.oduncAlinanlarBarkodNo.indexOf(barkod))}" />
+					</h:column>
+				
+					<h:column>
+						<f:facet name="header">Barkod No</f:facet>
+						<h:outputText value="#{barkod}" />
+					</h:column>
+								
+					<h:column>
+						<f:facet name="header">İşlem</f:facet>
+						<h:commandButton  styleClass="btn btn-warning" action="#{oduncislemler.teslimEt(barkod)}" value="Teslim Al" />
+					</h:column>
+		
+				</h:dataTable>
+			
+			</h:form>
+        </div>
+
+        <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+        </div>
+       </div>
+      </div>
+  </div>
+</div>
+			
+		 <p:growl id="growl" showDetail="true" sticky="true" globalOnly="true" life="2"  />
+								
+</body> 
+</html>
